@@ -229,7 +229,9 @@
             }
             return _results;
           };
-          scope.$watch('treeData', on_treeData_change, true);
+          scope.$watch((function() {
+            return JSON.stringify(scope.treeData);
+          }), on_treeData_change);
           if (attrs.initialSelection != null) {
             for_each_branch(function(b) {
               if (b.label === attrs.initialSelection) {

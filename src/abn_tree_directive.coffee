@@ -239,10 +239,11 @@ module.directive 'abnTree',['$timeout',($timeout)->
 
 
     #
-    # make sure to do a "deep watch" on the tree data
+    # avoid a "deep watch" on the tree data
     # ( by passing "true" as the third arg )
-    #
-    scope.$watch 'treeData',on_treeData_change,true
+    # instead use a string version of the tree, much faster for bigger structures
+    # than the repeated copying needed for a deep watch
+    scope.$watch (()-> return JSON.stringify(scope.treeData)), on_treeData_change
 
 
     #
