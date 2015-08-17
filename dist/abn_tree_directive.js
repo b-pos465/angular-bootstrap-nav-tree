@@ -187,6 +187,9 @@
               if (branch.expanded == null) {
                 branch.expanded = false;
               }
+              if (branch.filtered == null) {
+                branch.filtered = false;
+              }
               if (branch.classes == null) {
                 branch.classes = [];
               }
@@ -202,14 +205,16 @@
                   tree_icon = branch.iconExpand ? branch.iconExpand : attrs.iconExpand;
                 }
               }
-              scope.tree_rows.push({
-                level: level,
-                branch: branch,
-                label: branch.label,
-                classes: branch.classes,
-                tree_icon: tree_icon,
-                visible: visible
-              });
+              if (!branch.filtered) {
+                scope.tree_rows.push({
+                  level: level,
+                  branch: branch,
+                  label: branch.label,
+                  classes: branch.classes,
+                  tree_icon: tree_icon,
+                  visible: visible
+                });
+              }
               if (branch.children != null) {
                 _ref = branch.children;
                 _results = [];

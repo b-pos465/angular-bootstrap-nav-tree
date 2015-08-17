@@ -188,6 +188,9 @@ module.directive 'abnTree',['$timeout',($timeout)->
         if not branch.expanded?
           branch.expanded = false
 
+        if not branch.filtered?
+          branch.filtered = false
+
         if not branch.classes?
           branch.classes = []
 
@@ -209,13 +212,14 @@ module.directive 'abnTree',['$timeout',($timeout)->
         #
         # append to the list of "Tree Row" objects:
         #
-        scope.tree_rows.push
-          level     : level
-          branch    : branch
-          label     : branch.label
-          classes   : branch.classes
-          tree_icon : tree_icon
-          visible   : visible
+        if not branch.filtered
+          scope.tree_rows.push
+            level     : level
+            branch    : branch
+            label     : branch.label
+            classes   : branch.classes
+            tree_icon : tree_icon
+            visible   : visible
 
         #
         # recursively add all children of this branch...( at Level+1 )
